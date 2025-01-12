@@ -28,6 +28,19 @@ class MapTest {
         }
         assertEquals("expected to contain:<{\"one\"=null}> but was:<{}>", error.message)
     }
+
+    @Test
+    fun containsKey_key_present_passes() {
+        assertThat(mapOf("one" to 1)).containsKey("one")
+    }
+
+    @Test
+    fun containsKey_key_missing_fails() {
+        val error = assertFailsWith<AssertionError> {
+            assertThat(mapOf("one" to 1)).containsKey("two")
+        }
+        assertEquals("expected to contain key:<\"two\"> but was:<[\"one\"]>", error.message)
+    }
     //endregion
 
     //region doesNotContain

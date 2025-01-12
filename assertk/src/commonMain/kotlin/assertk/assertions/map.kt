@@ -75,6 +75,14 @@ fun <K, V> Assert<Map<K, V>>.contains(element: Pair<K, V>) {
 }
 
 /**
+ * Asserts the map contains the expected key.
+ */
+fun <K, V> Assert<Map<K, V>>.containsKey(key: K) = given {
+    if (it.containsKey(key)) return
+    expected("to contain key:${show(key)} but was:${show(it.keys)}")
+}
+
+/**
  * Asserts the map contains at least the expected elements. The map may also contain additional elements.
  * @see [containsNone]
  * @see [containsExactly]
