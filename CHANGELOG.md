@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-- Overload `single` assertion .
+- Add version of the `single` function which takes a predicate for selecting the element from a collection.
 
 ### Changed
 - renamed `prop` to `having` as part of effort to unify API naming, old name is deprecated.
