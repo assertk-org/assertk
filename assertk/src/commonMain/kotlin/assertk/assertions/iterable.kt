@@ -331,3 +331,18 @@ fun <E, T : Iterable<E>> Assert<T>.single(): Assert<E> {
         }
     }
 }
+
+/**
+ * Asserts the iterable contains exactly one element matching the expected element,
+ * and returns an assert on that element.
+ */
+fun <E, T : Iterable<E>> Assert<T>.single(predicate: (E) -> Boolean): Assert<E> {
+    return transform(appendName("single", ".")) { iterable ->
+        val matching = iterable.filter(predicate)
+        when (matching.size) {
+            1 -> matching.single()
+            0 -> expected("to have single element matching predicate but none found")
+            else -> expected("to have single element matching predicate but has ${matching.size}: ${show(matching)}")
+        }
+    }
+}
