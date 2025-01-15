@@ -599,7 +599,7 @@ class IterableTest {
     @Test
     fun single_single_element_match_passes() {
         assertThat(listOf(1)).single().isEqualTo(1)
-        assertThat(listOf(1)).single { it > 0 }.isEqualTo(1)
+        assertThat(listOf(-1, 1, 0, -2)).single { it > 0 }.isEqualTo(1)
     }
 
     @Test
