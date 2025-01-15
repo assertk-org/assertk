@@ -599,30 +599,46 @@ class IterableTest {
     @Test
     fun single_single_element_match_passes() {
         assertThat(listOf(1)).single().isEqualTo(1)
+        assertThat(listOf(1)).single { it > 0 }.isEqualTo(1)
     }
 
     @Test
     fun single_single_element_mismatch_fails() {
-        val error = assertFailsWith<AssertionError> {
+        val error1 = assertFailsWith<AssertionError> {
             assertThat(listOf(1)).single().isEqualTo(2)
         }
-        assertEquals("expected [single]:<[2]> but was:<[1]> ([1])", error.message)
+        assertEquals("expected [single]:<[2]> but was:<[1]> ([1])", error1.message)
+
+        val error2 = assertFailsWith<AssertionError> {
+            assertThat(listOf(1)).single { it > 0 }.isEqualTo(2)
+        }
+        assertEquals("expected [single]:<[2]> but was:<[1]> ([1])", error2.message)
     }
 
     @Test
     fun single_no_element_fails() {
-        val error = assertFailsWith<AssertionError> {
+        val error1 = assertFailsWith<AssertionError> {
             assertThat(emptyList<Any?>()).single().isEqualTo(1)
         }
-        assertEquals("expected to have single element but was empty", error.message)
+        assertEquals("expected to have single element but was empty", error1.message)
+
+        val error2 = assertFailsWith<AssertionError> {
+            assertThat(emptyList<Any?>()).single { it != null }.isEqualTo(1)
+        }
+        assertEquals("expected to have single element matching predicate but none found", error2.message)
     }
 
     @Test
     fun single_multiple_fails() {
-        val error = assertFailsWith<AssertionError> {
+        val error1 = assertFailsWith<AssertionError> {
             assertThat(listOf(1, 2)).single().isEqualTo(1)
         }
-        assertEquals("expected to have single element but has 2: <[1, 2]>", error.message)
+        assertEquals("expected to have single element but has 2: <[1, 2]>", error1.message)
+
+        val error2 = assertFailsWith<AssertionError> {
+            assertThat(listOf(1, 2)).single { it > 0 }.isEqualTo(1)
+        }
+        assertEquals("expected to have single element matching predicate but has 2: <[1, 2]>", error2.message)
     }
     //endregion
 
