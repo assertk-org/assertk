@@ -97,13 +97,13 @@ private fun <T> Assert<T>.isDataClassEqualToImpl(expected: T, kclass: KClass<*>?
 /**
  * Returns an assert that compares all accessible properties except the given properties on the calling class.
  * @param other Other value to compare to
- * @param properties properties of the type with which been ignored
+ * @param properties properties of the type which will be ignored during comparison
  *
  * ```
  * assertThat(person).isEqualToIgnoringGivenProperties(other, Person::name, Person::age)
  * ```
  */
-fun <T : Any> Assert<T>.isEqualToIgnoringGivenProperties(other: T, vararg properties: KProperty1<T, Any?>) {
+fun <T : Any> Assert<T>.isEqualToIgnoringGivenProperties(other: T, vararg properties: KProperty1<out T, Any?>) {
     all {
         for (prop in other::class.memberProperties) {
             if (!properties.contains(prop)) {
