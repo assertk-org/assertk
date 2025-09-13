@@ -1,46 +1,23 @@
-import org.jetbrains.dokka.gradle.DokkaTask
-import java.util.Locale
-
 plugins {
     `maven-publish`
     signing
-    id("org.jetbrains.dokka")
 }
 
-group = rootProject.group
+group = "com.willowtreeapps.assertk"
 version = rootProject.version
 
-tasks.withType<DokkaTask>().configureEach {
-    dokkaSourceSets {
-        configureEach {
-            // group js and native docs into buckets
-            displayName.set(platform.get().name)
-            // Set source links to github
-            sourceLink {
-                localDirectory.set(file("src"))
-                remoteUrl.set(java.net.URL("https://github.com/assertk-org/assertk"))
-                remoteLineSuffix.set("#L")
-            }
-        }
-    }
+repositories {
+    mavenCentral()
 }
 
-val dokkaCommon by tasks.registering(DokkaTask::class) {
-    outputDirectory.set(layout.buildDirectory.dir("javadoc/common"))
-    dokkaSourceSets {
-        @Suppress("UNUSED_VARIABLE")
-        val commonMain by getting
-    }
-}
-val dokkaJavadocCommonJar by tasks.registering(Jar::class) {
+val emptyJavadocJar by tasks.registering(Jar::class) {
     archiveClassifier.set("javadoc")
-    from(dokkaCommon)
 }
 
 publishing {
     publications.all {
         if (this is MavenPublication) {
-            artifact(dokkaJavadocCommonJar)
+            artifact(emptyJavadocJar)
 
             val siteUrl = "https://github.com/assertk-org/assertk"
             val gitUrl = "https://github.com/assertk-org/assertk.git"
@@ -70,16 +47,6 @@ publishing {
                         name.set("Eva Tatarka")
                     }
                 }
-            }
-        }
-    }
-
-    // create task to publish all apple (macos, ios, tvos, watchos) artifacts
-    @Suppress("UNUSED_VARIABLE")
-    val publishApple by tasks.registering {
-        publications.all {
-            if (name.contains(Regex("macos|ios|tvos|watchos"))) {
-                dependsOn("publish${name.replaceFirstChar(Char::titlecase)}PublicationToSonatypeRepository")
             }
         }
     }
