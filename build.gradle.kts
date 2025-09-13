@@ -11,7 +11,7 @@ repositories {
     mavenCentral()
 }
 
-group = "com.willowtreeapps.assertk"
+group = "org.assertk"
 version = libs.versions.assertk.get()
 
 nexusPublishing {
