@@ -51,7 +51,7 @@ internal expect fun displayPlatformSpecific(value: Any?): String
 /**
  * Fails an assert with the given expected and actual values.
  */
-fun <T> Assert<T>.fail(expected: Any?, actual: Any?) {
+fun <T> Assert<T>.fail(expected: Any?, actual: Any?): Nothing {
     if (expected == null || actual == null || expected == actual) {
         expected(message = ":${show(expected)} but was:${show(actual)}", expected = expected, actual = actual)
     } else {
