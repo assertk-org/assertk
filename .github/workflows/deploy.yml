@@ -1,0 +1,64 @@
+name: deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    env:
+      JVM_OPTS: -Xmx3200m
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 24
+        uses: actions/setup-java@v4
+        with:
+          java-version: '24'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
+        with:
+          cache-read-only: true
+
+      - name: Build
+        run: ./gradlew build
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: test-results-linux
+          path: |
+            build/test-results/**/*.xml
+            */build/test-results/**/*.xml
+
+      - name: Setup GPG
+        env:
+          MAVEN_CENTRAL_SEC_RING: ${{ secrets.MAVEN_CENTRAL_SEC_RING }}
+        run: |
+          echo "$MAVEN_CENTRAL_SEC_RING" | base64 -d > $HOME/secring.gpg
+          gpg --import --batch $HOME/secring.gpg
+
+      - name: Generate Javadoc
+        run: ./gradlew dokkaJavadocCommonJar
+
+      - name: Publish to Maven Central
+        env:
+          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+          MAVEN_CENTRAL_KEY_ID: ${{ secrets.MAVEN_CENTRAL_KEY_ID }}
+          MAVEN_CENTRAL_KEY_PASSPHRASE: ${{ secrets.MAVEN_CENTRAL_KEY_PASSPHRASE }}
+        run: |
+          ./gradlew publish \
+            -PsonatypeUsername="$SONATYPE_USERNAME" \
+            -PsonatypePassword="$SONATYPE_PASSWORD" \
+            -Psigning.keyId="$MAVEN_CENTRAL_KEY_ID" \
+            -Psigning.password="$MAVEN_CENTRAL_KEY_PASSPHRASE" \
+            -Psigning.secretKeyRingFile=$HOME/secring.gpg \
+            --no-parallel
