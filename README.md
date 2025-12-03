@@ -6,7 +6,7 @@
 
 assertk is a fluent assertion library for Kotlin inspired by [AssertJ](https://github.com/assertj/assertj-core).
 
-- [Documentation](https://willowtreeapps.github.io/assertk/assertk/assertk.assertions/index.html)
+- [Documentation](https://assertk-org.github.io/assertk/assertk/assertk.assertions/index.html)
 
 ## Why another assertion library?
 
@@ -80,7 +80,7 @@ class PersonTest {
 ```
 
 You can see all built-in assertions in
-the [docs](https://willowtreeapps.github.io/assertk/assertk/assertk.assertions/index.html).
+the [docs](https://assertk-org.github.io/assertk/assertk/assertk.assertions/index.html).
 
 ### Nullability
 
