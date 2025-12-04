@@ -1,7 +1,7 @@
 # assertk-coroutines
 
 This lib adds some assertions for coroutines/flow. You can see all built-in assertions in the
-[docs](https://assertk-org.github.io/assertk/javadoc/assertk-coroutines/assertk-coroutines/assertk.coroutines.assertions/index.html).
+[docs](https://assertk-org.github.io/assertk/assertk-coroutines/assertk.coroutines.assertions/index.html)
 
 ## Setup
 
