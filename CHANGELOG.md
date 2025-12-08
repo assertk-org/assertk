@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - added assertions `isIn(Iterable<T>)` and `isNotIn(Iterable<T>)`
 - change `Assert<T>.fail` return type to `Nothing`.
 
+### Added
+- Added `doesNotExist` assertions to `Path`
+- Added `havingInstancesOf` and `notHavingInstancesOf` for `Iterable` and `Array`
+
 ## [0.28.1] 2024-04-17
 
 ### Added
