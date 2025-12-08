@@ -18,6 +18,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - added assertions `isIn(Iterable<T>)` and `isNotIn(Iterable<T>)`
 - change `Assert<T>.fail` return type to `Nothing`.
 
+### Added
+- `havingValue` for `StateFlow` assertions
+
 ## [0.28.1] 2024-04-17
 
 ### Added
