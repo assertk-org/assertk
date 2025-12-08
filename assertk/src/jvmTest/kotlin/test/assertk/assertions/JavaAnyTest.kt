@@ -207,6 +207,22 @@ class JavaAnyTest {
             BasicObject::failing
         )
     }
+
+    @Test
+    fun isEqualToIgnoringGivenProperties_passes_subclass() {
+        fun testObject(): TestObject {
+            return BasicObject(str = "Rarity")
+        }
+
+        assertThat(
+            testObject()
+        ).isEqualToIgnoringGivenProperties(
+            BasicObject(str = "notRarity"),
+            BasicObject::str,
+            BasicObject::other,
+            BasicObject::failing
+        )
+    }
     //endregion
 
     open class TestObject
