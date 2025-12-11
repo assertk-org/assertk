@@ -1,0 +1,1 @@
+Empty artifact for migrating from com.willowtreeaps.assertk to org.assertk

@@ -18,7 +18,7 @@ tasks.withType<DokkaTask>().configureEach {
             // Set source links to github
             sourceLink {
                 localDirectory.set(file("src"))
-                remoteUrl.set(java.net.URL("https://github.com/willowtreeapps/assertk/tree/v${project.version}/${project.name}/src"))
+                remoteUrl.set(java.net.URL("https://github.com/assertk-org/assertk"))
                 remoteLineSuffix.set("#L")
             }
         }
@@ -42,8 +42,8 @@ publishing {
         if (this is MavenPublication) {
             artifact(dokkaJavadocCommonJar)
 
-            val siteUrl = "https://github.com/willowtreeapps/assertk"
-            val gitUrl = "https://github.com/willowtreeapps/assertk.git"
+            val siteUrl = "https://github.com/assertk-org/assertk"
+            val gitUrl = "https://github.com/assertk-org/assertk.git"
 
             pom {
                 name.set(project.name)

@@ -61,3 +61,14 @@ kotlin {
         }
     }
 }
+
+dependencies {
+    constraints {
+        commonMainImplementation("com.willowtreeapps.assertk:assert:${rootProject.version}") {
+            because("groupId migration")
+        }
+        commonMainApi("com.willowtreeapps.assertk:assert:${rootProject.version}") {
+            because("groupId migration")
+        }
+    }
+}

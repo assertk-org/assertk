@@ -11,4 +11,9 @@ rootProject.name = "assertk-project"
 include(
     ":assertk",
     ":assertk-coroutines",
+    ":migration-assertk",
+    ":migration-assertk-coroutines"
 )
+
+project(":migration-assertk").projectDir = file("migration/assertk")
+project(":migration-assertk-coroutines").projectDir = file("migration/assertk-coroutines")
