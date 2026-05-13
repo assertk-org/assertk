@@ -135,7 +135,7 @@ class AnyTest {
         val error = assertFailsWith<AssertionError> {
             assertThat(subject).isIn(isOut1, isOut2)
         }
-        assertEquals("expected:<[not test1, not test2]> to contain:<test>", error.message)
+        assertEquals("expected:<test> to be in:<[not test1, not test2]>", error.message)
     }
 
     @Test
@@ -150,7 +150,7 @@ class AnyTest {
         val error = assertFailsWith<AssertionError> {
             assertThat(subject).isIn(list)
         }
-        assertEquals("expected:<[not test1]> to contain:<test>", error.message)
+        assertEquals("expected:<test> to be in:<[not test1]>", error.message)
     }
 
     @Test
@@ -165,7 +165,7 @@ class AnyTest {
         val error = assertFailsWith<AssertionError> {
             assertThat(subject).isIn(list)
         }
-        assertEquals("expected:<[not test1, not test2]> to contain:<test>", error.message)
+        assertEquals("expected:<test> to be in:<[not test1, not test2]>", error.message)
     }
 
     @Test
@@ -183,7 +183,7 @@ class AnyTest {
         val error = assertFailsWith<AssertionError> {
             assertThat(subject).isNotIn(isOut1, isIn, isOut2)
         }
-        assertEquals("expected:<[not test1, test, not test2]> to not contain:<test>", error.message)
+        assertEquals("expected:<test> to not be in:<[not test1, test, not test2]>", error.message)
     }
 
     @Test
@@ -198,7 +198,7 @@ class AnyTest {
         val error = assertFailsWith<AssertionError> {
             assertThat(subject).isNotIn(list)
         }
-        assertEquals("expected:<[test]> to not contain:<test>", error.message)
+        assertEquals("expected:<test> to not be in:<[test]>", error.message)
     }
 
     @Test
@@ -213,7 +213,7 @@ class AnyTest {
         val error = assertFailsWith<AssertionError> {
             assertThat(subject).isNotIn(list)
         }
-        assertEquals("expected:<[not test1, test, not test2]> to not contain:<test>", error.message)
+        assertEquals("expected:<test> to not be in:<[not test1, test, not test2]>", error.message)
     }
 
     @Test

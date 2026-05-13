@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - signature of `isIn` and `isNotIn` has been changed to ensure at least two items are supplied.
 - added assertions `isIn(Iterable<T>)` and `isNotIn(Iterable<T>)`
 - change `Assert<T>.fail` return type to `Nothing`.
+- `isIn` and `isNotIn` failure messages now report the actual value against the expected collection.
 
 ## [0.28.1] 2024-04-17
 
