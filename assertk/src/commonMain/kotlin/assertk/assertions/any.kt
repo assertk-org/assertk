@@ -95,13 +95,13 @@ fun Assert<Any?>.isNotSameInstanceAs(expected: Any?) = given { actual ->
 fun <T> Assert<T>.isIn(first: T, second: T, vararg rest: T) = given { actual ->
     val values = listOf(first, second, *rest)
     if (actual in values) return
-    expected(":${show(values)} to contain:${show(actual)}")
+    expected(":${show(actual)} to be in:${show(values)}")
 }
 
 @Deprecated("For binary compatibility", level = DeprecationLevel.HIDDEN)
 fun <T> Assert<T>.isIn(vararg values: T) = given { actual ->
     if (actual in values) return
-    expected(":${show(values)} to contain:${show(actual)}")
+    expected(":${show(actual)} to be in:${show(values)}")
 }
 
 @Deprecated("isIn with no values always fails", level = DeprecationLevel.ERROR)
@@ -124,7 +124,7 @@ fun <T> Assert<T>.isIn(first: T) {
  */
 fun <T> Assert<T>.isIn(values: Iterable<T>) = given { actual ->
     if (actual in values) return
-    expected(":${show(values)} to contain:${show(actual)}")
+    expected(":${show(actual)} to be in:${show(values)}")
 }
 
 /**
@@ -134,13 +134,13 @@ fun <T> Assert<T>.isIn(values: Iterable<T>) = given { actual ->
 fun <T> Assert<T>.isNotIn(first: T, second: T, vararg rest: T) = given { actual ->
     val values = listOf(first, second, *rest)
     if (actual !in values) return
-    expected(":${show(values)} to not contain:${show(actual)}")
+    expected(":${show(actual)} to not be in:${show(values)}")
 }
 
 @Deprecated("For binary compatibility", level = DeprecationLevel.HIDDEN)
 fun <T> Assert<T>.isNotIn(vararg values: T) = given { actual ->
     if (actual !in values) return
-    expected(":${show(values)} to not contain:${show(actual)}")
+    expected(":${show(actual)} to not be in:${show(values)}")
 }
 
 @Deprecated("isNotIn with no values always succeeds", level = DeprecationLevel.ERROR)
@@ -163,7 +163,7 @@ fun <T> Assert<T>.isNotIn(first: T) {
  */
 fun <T> Assert<T>.isNotIn(values: Iterable<T>) = given { actual ->
     if (actual !in values) return
-    expected(":${show(values)} to not contain:${show(actual)}")
+    expected(":${show(actual)} to not be in:${show(values)}")
 }
 
 /**
