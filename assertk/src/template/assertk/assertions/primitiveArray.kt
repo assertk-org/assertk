@@ -10,6 +10,7 @@ import assertk.assertions.support.fail
 import assertk.assertions.support.appendName
 
 $T:$N:$E:$A =
+    BooleanArray:booleanArray:Boolean:,
     ByteArray:byteArray:Byte:,
     IntArray:intArray:Int:,
     ShortArray:shortArray:Short:,
