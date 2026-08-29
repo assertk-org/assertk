@@ -55,8 +55,8 @@ jobs:
             ".circleci/config.yml" }}-linux
   build-macos:
     macos:
-      xcode: "14.1.0"
-    resource_class: macos.m1.medium.gen1
+      xcode: "15.4.0"
+    resource_class: m4pro.medium
     <<: *defaults
     steps:
       - checkout
@@ -93,13 +93,23 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install JDK 17
+          shell: powershell.exe
+          command: |
+            $ErrorActionPreference = "Stop"
+            Invoke-WebRequest "https://api.adoptium.net/v3/binary/latest/17/ga/windows/x64/jdk/hotspot/normal/eclipse" -OutFile jdk17.zip
+            Expand-Archive jdk17.zip -DestinationPath C:\jdk
+      - run:
           <<: *gradle_checksum_windows
       - restore_cache:
           key: >-
             gradle-{{ checksum ".circleci/gradle_cache_seed" }}-{{ checksum
             ".circleci/config.yml" }}-windows
       - run:
-          command: ./gradlew --no-daemon build -x wasmJsNodeTest -x wasmWasiNodeTest
+          command: |
+            export JAVA_HOME=$(ls -d /c/jdk/jdk-17* | head -1)
+            [ -n "$JAVA_HOME" ]
+            ./gradlew --no-daemon build -x wasmJsNodeTest -x wasmWasiNodeTest
           shell: bash.exe
       - save_cache:
           paths:
