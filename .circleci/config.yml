@@ -32,7 +32,7 @@ jobs:
             ".circleci/config.yml" }}-linux
       - run:
           name: Build
-          command: ./gradlew build
+          command: ./gradlew build --max-workers=2
       - gradle/collect_test_results:
           test_results_path: build/test-results
           reports_path: build/reports
