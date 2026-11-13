@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - The group id has changed from 'com.willowtreeapps.assertk' to 'org.assertk'
 
 ### Changed
+- Clarified when `assertThat` uses `displayActual` in failure messages.
 - renamed `prop` to `having` as part of effort to unify API naming, old name is deprecated.
 - renamed `suspendCall` to `having` as part of effort to unify API naming, old name is deprecated.
 - added `doesNotExist` assertions to `Path`.

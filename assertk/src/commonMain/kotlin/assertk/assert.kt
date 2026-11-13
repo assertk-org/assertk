@@ -109,6 +109,30 @@ internal expect fun showError(e: Throwable): String
  * ```
  * assertThat(true, name = "true").isTrue()
  * ```
+ *
+ * [displayActual] formats the original value when it is included as context in a failure message.
+ * It does not replace the expected or actual values shown by a direct assertion:
+ *
+ * ```
+ * val items = listOf("one")
+ *
+ * assertThat(items, displayActual = { "items: ${it.joinToString()}" }).contains("two")
+ * // expected to contain:<"two"> but was:<["one"]>
+ * ```
+ *
+ * After transforming the list to its size, the original list is included as context:
+ *
+ * ```
+ * val items = listOf("one")
+ *
+ * assertThat(items, displayActual = { "items: ${it.joinToString()}" })
+ *     .transform { it.size }.isEqualTo(2)
+ * // expected:<[2]> but was:<[1]> (items: one)
+ * ```
+ *
+ * @param actual the value to assert on.
+ * @param name an optional name identifying the value in failure messages.
+ * @param displayActual formats the original value when it is included as context in a failure message.
  */
 fun <T> assertThat(
     actual: T,

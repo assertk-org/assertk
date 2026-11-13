@@ -2,6 +2,7 @@ package test.assertk
 
 import assertk.assertAll
 import assertk.assertThat
+import assertk.assertions.contains
 import assertk.assertions.isEqualTo
 import assertk.fail
 import kotlin.test.*
@@ -75,6 +76,27 @@ class AssertTest {
         }
 
         assertEquals("expected [test]:<[2]> but was:<[1]> (Number:0)", error.message)
+    }
+
+    @Test
+    fun assertThat_displayActual_does_not_replace_untransformed_value() {
+        val items = listOf("one")
+        val error = assertFailsWith<AssertionError> {
+            assertThat(items, displayActual = { "items: ${it.joinToString()}" }).contains("two")
+        }
+
+        assertEquals("expected to contain:<\"two\"> but was:<[\"one\"]>", error.message)
+    }
+
+    @Test
+    fun assertThat_displayActual_formats_context_after_transform() {
+        val items = listOf("one")
+        val error = assertFailsWith<AssertionError> {
+            assertThat(items, displayActual = { "items: ${it.joinToString()}" })
+                .transform { it.size }.isEqualTo(2)
+        }
+
+        assertEquals("expected:<[2]> but was:<[1]> (items: one)", error.message)
     }
 
     @Test
