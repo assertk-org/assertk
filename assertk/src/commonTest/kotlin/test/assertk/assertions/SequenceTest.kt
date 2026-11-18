@@ -598,7 +598,10 @@ class SequenceTest {
             assertThat(sequenceOf("one", "two")).extracting { it.length }.containsExactly(2, 2)
         }
         assertEquals(
-            """expected to contain exactly:<[2, 2]> but was:<[3, 3]>
+            """expected to contain exactly:
+                |<[2, 2]>
+                |but was:
+                |<[3, 3]>
             | at index:0 expected:<2>
             | at index:0 unexpected:<3>
             | at index:1 expected:<2>
@@ -621,7 +624,10 @@ class SequenceTest {
                 .containsExactly("one" to 2, "two" to 1)
         }
         assertEquals(
-            """expected to contain exactly:<[("one", 2), ("two", 1)]> but was:<[("one", 1), ("two", 2)]>
+            """expected to contain exactly:
+                |<[("one", 2), ("two", 1)]>
+                |but was:
+                |<[("one", 1), ("two", 2)]>
             | at index:0 expected:<("one", 2)>
             | at index:0 unexpected:<("one", 1)>
             | at index:1 expected:<("two", 1)>
@@ -645,7 +651,10 @@ class SequenceTest {
                 .containsExactly(Triple("one", 1, '2'), Triple("two", 2, '3'))
         }
         assertEquals(
-            """expected to contain exactly:<[("one", 1, '2'), ("two", 2, '3')]> but was:<[("one", 1, '1'), ("two", 2, '2')]>
+            """expected to contain exactly:
+                |<[("one", 1, '2'), ("two", 2, '3')]>
+                |but was:
+                |<[("one", 1, '1'), ("two", 2, '2')]>
             | at index:0 expected:<("one", 1, '2')>
             | at index:0 unexpected:<("one", 1, '1')>
             | at index:1 expected:<("two", 2, '3')>
