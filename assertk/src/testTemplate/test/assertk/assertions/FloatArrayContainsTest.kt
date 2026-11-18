@@ -160,7 +160,10 @@ class $TContainsTest {
             assertThat($NOf(1.to$E(), 2.to$E())).containsExactly(2.to$E(), 1.to$E())
         }
         assertEquals(
-            """expected to contain exactly:<${show(listOf(2.to$E(), 1.to$E()), "")}> but was:<${show(listOf(1.to$E(), 2.to$E()), "")}>
+            """expected to contain exactly:
+                |<${show(listOf(2.to$E(), 1.to$E()), "")}>
+                |but was:
+                |<${show(listOf(1.to$E(), 2.to$E()), "")}>
                 | at index:0 expected:<${show(2.to$E(), "")}>
                 | at index:1 unexpected:<${show(2.to$E(), "")}>
             """.trimMargin(), error.message
@@ -173,7 +176,10 @@ class $TContainsTest {
             assertThat($NOf(1.to$E(), 2.to$E())).containsExactly(3.to$E())
         }
         assertEquals(
-            """expected to contain exactly:<${show(listOf(3.to$E()), "")}> but was:<${show(listOf(1.to$E(), 2.to$E()), "")}>
+            """expected to contain exactly:
+                |<${show(listOf(3.to$E()), "")}>
+                |but was:
+                |<${show(listOf(1.to$E(), 2.to$E()), "")}>
                 | at index:0 expected:<${show(3.to$E(), "")}>
                 | at index:0 unexpected:<${show(1.to$E(), "")}>
                 | at index:1 unexpected:<${show(2.to$E(), "")}>
@@ -187,7 +193,10 @@ class $TContainsTest {
             assertThat($NOf(1.to$E(), 1.to$E())).containsExactly(2.to$E(), 2.to$E())
         }
         assertEquals(
-            """expected to contain exactly:<${show(listOf(2.to$E(), 2.to$E()), "")}> but was:<${show(listOf(1.to$E(), 1.to$E()), "")}>
+            """expected to contain exactly:
+                |<${show(listOf(2.to$E(), 2.to$E()), "")}>
+                |but was:
+                |<${show(listOf(1.to$E(), 1.to$E()), "")}>
                 | at index:0 expected:<${show(2.to$E(), "")}>
                 | at index:0 unexpected:<${show(1.to$E(), "")}>
                 | at index:1 expected:<${show(2.to$E(), "")}>
@@ -202,7 +211,10 @@ class $TContainsTest {
             assertThat($NOf(1.to$E(), 2.to$E())).containsExactly(1.to$E(), 2.to$E(), 3.to$E())
         }
         assertEquals(
-            """expected to contain exactly:<${show(listOf(1.to$E(), 2.to$E(), 3.to$E()), "")}> but was:<${show(listOf(1.to$E(), 2.to$E()), "")}>
+            """expected to contain exactly:
+                |<${show(listOf(1.to$E(), 2.to$E(), 3.to$E()), "")}>
+                |but was:
+                |<${show(listOf(1.to$E(), 2.to$E()), "")}>
                 | at index:2 expected:<${show(3.to$E(), "")}>
             """.trimMargin(), error.message
         )
@@ -214,7 +226,10 @@ class $TContainsTest {
             assertThat($NOf(1.to$E(), 3.to$E())).containsExactly(1.to$E(), 2.to$E(), 3.to$E())
         }
         assertEquals(
-            """expected to contain exactly:<${show(listOf(1.to$E(), 2.to$E(), 3.to$E()), "")}> but was:<${show(listOf(1.to$E(), 3.to$E()), "")}>
+            """expected to contain exactly:
+                |<${show(listOf(1.to$E(), 2.to$E(), 3.to$E()), "")}>
+                |but was:
+                |<${show(listOf(1.to$E(), 3.to$E()), "")}>
                 | at index:1 expected:<${show(2.to$E(), "")}>
             """.trimMargin(), error.message
         )
@@ -226,7 +241,10 @@ class $TContainsTest {
             assertThat($NOf(1.to$E(), 2.to$E(), 3.to$E())).containsExactly(1.to$E(), 3.to$E())
         }
         assertEquals(
-            """expected to contain exactly:<${show(listOf(1.to$E(), 3.to$E()), "")}> but was:<${show(listOf(1.to$E(), 2.to$E(), 3.to$E()), "")}>
+            """expected to contain exactly:
+                |<${show(listOf(1.to$E(), 3.to$E()), "")}>
+                |but was:
+                |<${show(listOf(1.to$E(), 2.to$E(), 3.to$E()), "")}>
                 | at index:1 unexpected:<${show(2.to$E(), "")}>
             """.trimMargin(), error.message
         )

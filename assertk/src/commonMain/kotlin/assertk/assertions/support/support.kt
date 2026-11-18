@@ -176,7 +176,7 @@ private fun listDifferExpected(elements: List<Any?>, actual: List<Any?>): String
         }
 
     return diff.joinToString(
-        prefix = "to contain exactly:${show(elements)} but was:${show(actual)}\n",
+        prefix = "to contain exactly:\n${show(elements)}\nbut was:\n${show(actual)}\n",
         separator = "\n"
     ) { edit ->
         when (edit) {

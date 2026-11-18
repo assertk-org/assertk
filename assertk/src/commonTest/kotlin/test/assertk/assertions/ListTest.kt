@@ -2,6 +2,8 @@ package test.assertk.assertions
 
 import assertk.assertThat
 import assertk.assertions.*
+import assertk.assertions.support.show
+import com.willowtreeapps.opentest4k.AssertionFailedError
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFails
@@ -9,6 +11,26 @@ import kotlin.test.assertFailsWith
 
 class ListTest {
     //region containsExactly
+    @Test
+    fun containsExactly_shows_expected_and_actual_on_separate_lines() {
+        data class Entry(val name: String, val count: Int)
+        val expected = listOf(Entry("an entry with a long description", 1))
+        val actual = listOf(Entry("an entry with a long description", 2))
+
+        val error = assertFailsWith<AssertionFailedError> {
+            assertThat(actual, name = "entries").containsExactly(expected.single())
+        }
+
+        assertEquals(
+            "expected [entries] to contain exactly:\n${show(expected)}\nbut was:\n${show(actual)}\n" +
+                " at index:0 expected:${show(expected[0])}\n" +
+                " at index:0 unexpected:${show(actual[0])}",
+            error.message,
+        )
+        assertEquals(expected as Any?, error.expected?.value)
+        assertEquals(actual as Any?, error.actual?.value)
+    }
+
     @Test
     fun containsExactly_all_elements_in_same_order_passes() {
         assertThat(listOf(1, 2)).containsExactly(1, 2)
@@ -20,7 +42,10 @@ class ListTest {
             assertThat(listOf(1, 2)).containsExactly(2, 1)
         }
         assertEquals(
-            """expected to contain exactly:<[2, 1]> but was:<[1, 2]>
+            """expected to contain exactly:
+                |<[2, 1]>
+                |but was:
+                |<[1, 2]>
                 | at index:0 expected:<2>
                 | at index:1 unexpected:<2>
             """.trimMargin(), error.message
@@ -34,7 +59,10 @@ class ListTest {
             assertThat(listOf("1", "2", "3")).containsExactly("2", "3", "1")
         }
         assertEquals(
-            """expected to contain exactly:<["2", "3", "1"]> but was:<["1", "2", "3"]>
+            """expected to contain exactly:
+                |<["2", "3", "1"]>
+                |but was:
+                |<["1", "2", "3"]>
                 | at index:0 unexpected:<"1">
                 | at index:2 expected:<"1">
             """.trimMargin(), error.message
@@ -47,7 +75,10 @@ class ListTest {
             assertThat(listOf(1, 1)).containsExactly(2, 2)
         }
         assertEquals(
-            """expected to contain exactly:<[2, 2]> but was:<[1, 1]>
+            """expected to contain exactly:
+                |<[2, 2]>
+                |but was:
+                |<[1, 1]>
                 | at index:0 expected:<2>
                 | at index:0 unexpected:<1>
                 | at index:1 expected:<2>
@@ -62,7 +93,10 @@ class ListTest {
             assertThat(listOf(1, 2)).containsExactly(3)
         }
         assertEquals(
-            """expected to contain exactly:<[3]> but was:<[1, 2]>
+            """expected to contain exactly:
+                |<[3]>
+                |but was:
+                |<[1, 2]>
                 | at index:0 expected:<3>
                 | at index:0 unexpected:<1>
                 | at index:1 unexpected:<2>
@@ -76,7 +110,10 @@ class ListTest {
             assertThat(listOf(1, 2)).containsExactly(1, 2, 3)
         }
         assertEquals(
-            """expected to contain exactly:<[1, 2, 3]> but was:<[1, 2]>
+            """expected to contain exactly:
+                |<[1, 2, 3]>
+                |but was:
+                |<[1, 2]>
                 | at index:2 expected:<3>
             """.trimMargin(), error.message
         )
@@ -88,7 +125,10 @@ class ListTest {
             assertThat(listOf(1, 3)).containsExactly(1, 2, 3)
         }
         assertEquals(
-            """expected to contain exactly:<[1, 2, 3]> but was:<[1, 3]>
+            """expected to contain exactly:
+                |<[1, 2, 3]>
+                |but was:
+                |<[1, 3]>
                 | at index:1 expected:<2>
             """.trimMargin(), error.message
         )
@@ -100,7 +140,10 @@ class ListTest {
             assertThat(listOf(1, 2, 3)).containsExactly(1, 3)
         }
         assertEquals(
-            """expected to contain exactly:<[1, 3]> but was:<[1, 2, 3]>
+            """expected to contain exactly:
+                |<[1, 3]>
+                |but was:
+                |<[1, 2, 3]>
                 | at index:1 unexpected:<2>
             """.trimMargin(), error.message
         )
